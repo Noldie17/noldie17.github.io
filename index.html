@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Will You Be My Valentine?</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #ffe6f2;
+            color: #333;
+            padding: 20px;
+        }
+        h1 {
+            color: #d63384;
+        }
+        #message {
+            font-size: 1.5em;
+            margin: 20px 0;
+        }
+        button {
+            font-size: 1.2em;
+            padding: 10px 20px;
+            margin: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        #yesBtn {
+            background-color: #28a745;
+            color: white;
+        }
+        #noBtn {
+            background-color: #dc3545;
+            color: white;
+        }
+        #catImage {
+            width: 300px;
+            height: auto;
+            margin: 20px 0;
+            border-radius: 10px;
+        }
+        #finalMessage {
+            display: none;
+            font-size: 2em;
+            color: #28a745;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>I Want to Know More About You Because You're Interesting!</h1>
+    <div id="message">Will you be my Valentine?</div>
+    <img id="catImage" src="https://i.imgur.com/4M34hi2.jpg" alt="Neutral cat"> <!-- Initial neutral cat -->
+    <br>
+    <button id="yesBtn">Yes</button>
+    <button id="noBtn">No</button>
+    <div id="finalMessage">Yay! Let's celebrate! 🎉</div>
+
+    <script>
+        let noCount = 0;
+        const messages = [
+            "Will you be my Valentine?",
+            "Please? Will you be my Valentine?",
+            "Come on, it'll be fun! Will you be my Valentine?",
+            "I promise it'll be great! Will you be my Valentine?",
+            "Don't break my heart! Will you be my Valentine?",
+            "One more chance? Will you be my Valentine?",
+            "Okay, last try... Will you be my Valentine?"
+        ];
+        const sadCats = [
+            "https://i.imgur.com/4M34hi2.jpg", // Neutral
+            "https://i.imgur.com/2yO8Z3m.jpg", // Slightly sad
+            "https://i.imgur.com/8KQq3dI.jpg", // Sadder
+            "https://i.imgur.com/5yH9Z2L.jpg", // Even sadder
+            "https://i.imgur.com/3xJ4K8P.jpg", // Very sad
+            "https://i.imgur.com/7N2M9Q4.jpg", // Extremely sad
+            "https://i.imgur.com/1A6B7C8.jpg"  // Heartbroken
+        ];
+        const happyCat = "https://i.imgur.com/9X2Y3Z4.gif"; // Dancing happy cat GIF
+
+        document.getElementById('noBtn').addEventListener('click', function() {
+            noCount++;
+            if (noCount < messages.length) {
+                document.getElementById('message').textContent = messages[noCount];
+                document.getElementById('catImage').src = sadCats[noCount];
+                // Make Yes button bigger
+                let yesBtn = document.getElementById('yesBtn');
+                let currentSize = parseFloat(window.getComputedStyle(yesBtn).fontSize);
+                yesBtn.style.fontSize = (currentSize + 5) + 'px';
+                yesBtn.style.padding = (parseFloat(yesBtn.style.paddingTop || 10) + 5) + 'px ' + (parseFloat(yesBtn.style.paddingLeft || 20) + 10) + 'px';
+            } else {
+                // After max tries, make Yes even bigger and pleading
+                document.getElementById('message').textContent = "Please, just say yes! Will you be my Valentine?";
+                document.getElementById('catImage').src = sadCats[sadCats.length - 1];
+                let yesBtn = document.getElementById('yesBtn');
+                yesBtn.style.fontSize = '3em';
+                yesBtn.style.padding = '30px 60px';
+            }
+        });
+
+        document.getElementById('yesBtn').addEventListener('click', function() {
+            document.getElementById('message').style.display = 'none';
+            document.getElementById('yesBtn').style.display = 'none';
+            document.getElementById('noBtn').style.display = 'none';
+            document.getElementById('catImage').src = happyCat;
+            document.getElementById('finalMessage').style.display = 'block';
+        });
+    </script>
+</body>
+</html>
